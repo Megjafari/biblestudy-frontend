@@ -1,1 +1,10 @@
+@if (auth.isLoggedIn()) {
+  <nav>
+    <a routerLink="/plans">Plans</a>
+    <a routerLink="/reader/PSA/23">Reader</a>
+    <a routerLink="/notes">Notes</a>
+    <button (click)="logout()">Log out</button>
+  </nav>
+}
+
 <router-outlet></router-outlet>
