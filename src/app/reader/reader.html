@@ -1,0 +1,20 @@
+@if (error()) {
+  <p>{{ error() }}</p>
+}
+
+@if (chapter(); as ch) {
+  <h1>{{ ch.reference }}</h1>
+
+  <select [value]="translation()" (change)="changeTranslation($any($event.target).value)">
+    <option value="kjv">King James (KJV)</option>
+    <option value="skb">Swedish (SKB)</option>
+  </select>
+
+  @for (v of ch.verses; track v.verse) {
+    <p [id]="'v' + v.verse" [class.highlight]="v.verse === highlightVerse()">
+      <strong>{{ v.verse }}</strong> {{ v.text }}
+    </p>
+  }
+
+  <p><small>{{ ch.copyright }}</small></p>
+}
