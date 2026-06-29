@@ -1,3 +1,31 @@
 .highlight {
   background: yellow;
 }
+
+.note-panel {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  padding: 1rem;
+}
+
+.selection-menu {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-top: 1px solid #ccc;
+  padding: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+p {
+  user-select: none;
+  cursor: pointer;
+}

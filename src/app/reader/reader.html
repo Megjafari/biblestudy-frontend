@@ -11,10 +11,46 @@
   </select>
 
   @for (v of ch.verses; track v.verse) {
-    <p [id]="'v' + v.verse" [class.highlight]="v.verse === highlightVerse()">
+    <p [id]="'v' + v.verse"
+       [style.background]="colorForVerse(v.verse)"
+       (mousedown)="startDrag(v.verse)"
+       (mouseenter)="extendDrag(v.verse)"
+       (mouseup)="endDrag()">
       <strong>{{ v.verse }}</strong> {{ v.text }}
     </p>
   }
 
   <p><small>{{ ch.copyright }}</small></p>
+}
+
+@if (menuVerses(); as sel) {
+  <div class="selection-menu">
+    <span>Verses {{ sel.start }}–{{ sel.end }}</span>
+
+    @if (!writingNote()) {
+      <button (click)="createHighlight()">Highlight</button>
+      <button (click)="startNote()">Note</button>
+      <button (click)="clearSelection()">Cancel</button>
+    } @else {
+      <input [value]="noteDraft()" (input)="noteDraft.set($any($event.target).value)" placeholder="Write a note" />
+      <button (click)="saveNote()">Save</button>
+      <button (click)="clearSelection()">Cancel</button>
+    }
+  </div>
+}
+
+@if (selectedNote(); as note) {
+  <div class="note-panel">
+    <p>{{ note.content }}</p>
+    <button (click)="deleteNote()">Delete</button>
+    <button (click)="closeNote()">Close</button>
+  </div>
+}
+
+@if (selectedHighlight(); as hl) {
+  <div class="note-panel">
+    <p>Highlight on verses {{ hl.startVerse }}–{{ hl.endVerse }}</p>
+    <button (click)="deleteHighlight()">Delete</button>
+    <button (click)="selectedHighlight.set(null)">Close</button>
+  </div>
 }
