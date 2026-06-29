@@ -1,0 +1,13 @@
+<h1>Register</h1>
+
+<input [value]="email()" (input)="email.set($any($event.target).value)" placeholder="Email" />
+<input [value]="username()" (input)="username.set($any($event.target).value)" placeholder="Username" />
+<input type="password" [value]="password()" (input)="password.set($any($event.target).value)" placeholder="Password" />
+
+<button (click)="submit()">Register</button>
+
+@if (error()) {
+  <p>{{ error() }}</p>
+}
+
+<p>Have an account? <a routerLink="/login">Log in</a></p>
