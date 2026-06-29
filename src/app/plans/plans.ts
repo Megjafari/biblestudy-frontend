@@ -1,9 +1,8 @@
 import { Component, inject, signal, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { environment } from '../../environments/environment';
-
-// TEMP: hardcoded token until real auth is built. Never commit a real value.
-const token = 'PASTE_TOKEN_HERE';
+import { Auth } from '../auth/auth';
 
 interface Plan {
   id: number;
@@ -21,14 +20,19 @@ interface Plan {
 })
 export class Plans implements OnInit {
   private http = inject(HttpClient);
+  private auth = inject(Auth);
+  private router = inject(Router);
 
   plans = signal<Plan[]>([]);
 
   ngOnInit() {
     this.http
-      .get<Plan[]>(`${environment.apiUrl}/api/plans`, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .get<Plan[]>(`${environment.apiUrl}/api/plans`)
       .subscribe((data) => this.plans.set(data));
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(['/login']);
   }
 }

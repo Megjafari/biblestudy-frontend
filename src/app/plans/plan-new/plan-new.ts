@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../../../environments/environment';
 
-const token = 'PASTE_TOKEN_HERE';
-
 @Component({
   selector: 'app-plan-new',
   imports: [],
@@ -27,9 +25,7 @@ export class PlanNew {
     };
 
     this.http
-      .post(`${environment.apiUrl}/api/plans`, body, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
+      .post(`${environment.apiUrl}/api/plans`, body)
       .subscribe(() => this.router.navigate(['/plans']));
   }
 }
