@@ -1,0 +1,8 @@
+<h1>Reading plans</h1>
+
+@for (plan of plans(); track plan.id) {
+  <div>
+    <h2>{{ plan.title }}</h2>
+    <p>{{ plan.description }}</p>
+  </div>
+}

@@ -1,0 +1,7 @@
+<h1>New plan</h1>
+
+<input [value]="title()" (input)="title.set($any($event.target).value)" placeholder="Title" />
+<input [value]="description()" (input)="description.set($any($event.target).value)" placeholder="Description" />
+<input type="date" [value]="startDate()" (input)="startDate.set($any($event.target).value)" />
+
+<button (click)="save()">Save</button>
