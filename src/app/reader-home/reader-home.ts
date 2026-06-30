@@ -20,8 +20,6 @@ export class ReaderHome implements OnInit {
   private router = inject(Router);
 
   books = signal<Book[]>([]);
-  chapters = signal<number[]>([]);
-  selectedBook = signal<Book | null>(null);
   lastRead = signal<{ book: string; chapter: number } | null>(null);
 
   ngOnInit() {
@@ -44,18 +42,7 @@ export class ReaderHome implements OnInit {
   }
 
   selectBook(book: Book) {
-    this.selectedBook.set(book);
-    this.chapters.set([]);
-    this.http
-      .get<number[]>(`${environment.apiUrl}/api/bible/books/${book.id}/chapters?translation=kjv`)
-      .subscribe((data) => this.chapters.set(data));
-  }
-
-  openChapter(chapter: number) {
-    const book = this.selectedBook();
-    if (book) {
-      this.router.navigate(['/reader', book.id, chapter]);
-    }
+    this.router.navigate(['/reader', book.id]);
   }
 
   continueReading() {
