@@ -81,6 +81,7 @@ export class Reader implements OnInit {
         next: (data) => {
           this.chapter.set(data);
           this.scrollToVerse();
+          localStorage.setItem('lastRead', JSON.stringify({ book: data.book, chapter: data.chapter }));
         },
         error: () => this.error.set('Could not load chapter'),
       });
