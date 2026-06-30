@@ -1,0 +1,26 @@
+<h1>Read the Bible</h1>
+
+@if (lastRead(); as last) {
+  <button (click)="continueReading()">Continue: {{ last.book }} {{ last.chapter }}</button>
+}
+
+@if (!selectedBook()) {
+  <h2>Old Testament</h2>
+  @for (book of oldTestament(); track book.id) {
+    <button (click)="selectBook(book)">{{ book.name }}</button>
+  }
+
+  <h2>New Testament</h2>
+  @for (book of newTestament(); track book.id) {
+    <button (click)="selectBook(book)">{{ book.name }}</button>
+  }
+}
+
+@if (selectedBook(); as book) {
+  <h2>{{ book.name }}</h2>
+  <button (click)="selectedBook.set(null)">← Back to books</button>
+
+  @for (c of chapters(); track c) {
+    <button (click)="openChapter(c)">{{ c }}</button>
+  }
+}
