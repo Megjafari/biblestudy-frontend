@@ -2,6 +2,7 @@ import { Component, inject, signal, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from '../../environments/environment';
+import { bookInfo, BookInfo } from './book-info';
 
 interface Book {
   id: string;
@@ -23,11 +24,13 @@ export class BookChapters implements OnInit {
   book = signal('');
   bookName = signal('');
   chapters = signal<number[]>([]);
+  info = signal<BookInfo | null>(null);
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
       const book = params['book'];
       this.book.set(book);
+      this.info.set(bookInfo[book] ?? null);
 
       this.http
         .get<number[]>(`${environment.apiUrl}/api/bible/books/${book}/chapters?translation=kjv`)

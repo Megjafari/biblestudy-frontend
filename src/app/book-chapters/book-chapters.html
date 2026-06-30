@@ -1,5 +1,22 @@
 <h1>{{ bookName() }}</h1>
 
+@if (info(); as i) {
+  @if (i.author || i.background || i.related.length) {
+    <div class="book-info">
+      @if (i.author) {
+        <p><strong>Author:</strong> {{ i.author }}</p>
+      }
+      @if (i.background) {
+        <p>{{ i.background }}</p>
+      }
+      @if (i.related.length) {
+        <p><strong>Related:</strong> {{ i.related.join(', ') }}</p>
+      }
+    </div>
+  }
+}
+
+<h2>Chapters</h2>
 @for (c of chapters(); track c) {
   <button (click)="openChapter(c)">{{ c }}</button>
 }
