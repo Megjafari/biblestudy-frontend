@@ -7,6 +7,7 @@ import { authGuard } from './auth/auth-guard';
 import { Reader } from './reader/reader';
 import { ReaderHome } from './reader-home/reader-home';
 import { BookChapters } from './book-chapters/book-chapters';
+import { Notes } from './notes/notes';
 
 export const routes: Routes = [
   { path: 'login', component: Login },
@@ -16,4 +17,5 @@ export const routes: Routes = [
   { path: 'reader/:book', component: BookChapters, canActivate: [authGuard] },
   { path: 'reader/:book/:chapter', component: Reader, canActivate: [authGuard] },
   { path: 'plans', component: Plans, canActivate: [authGuard] },
+  { path: 'notes', component: Notes, canActivate: [authGuard] },
 ];

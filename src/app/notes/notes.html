@@ -1,0 +1,14 @@
+<h1>Notes</h1>
+
+@if (notes().length === 0) {
+  <p>No notes yet.</p>
+}
+
+@for (note of notes(); track note.id) {
+  <div class="note-card">
+    <p class="ref">{{ note.book }} {{ note.chapter }}:{{ note.startVerse }}–{{ note.endVerse }}</p>
+    <p>{{ note.content }}</p>
+    <button (click)="readInContext(note)">Read in context</button>
+    <button (click)="deleteNote(note)">Delete</button>
+  </div>
+}
